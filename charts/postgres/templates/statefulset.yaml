@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.appName }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.appName }} # has to match .spec.template.metadata.labels
+  serviceName: {{ .Values.appName | toString }} 
+  replicas: {{ .Values.replicaCount }}  # by default is 1
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.appName }} # has to match .spec.selector.matchLabels
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: {{ .Values.appName }}
+          image: {{ .Values.image.repository }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - secretRef:
+                name: {{ .Values.appName }}-secret
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: {{ .Values.appName }}-db
+  volumeClaimTemplates:
+  - metadata:
+      name: {{ .Values.appName }}-db
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "local-path"
+      resources:
+        requests:
+          storage: 2Gi
