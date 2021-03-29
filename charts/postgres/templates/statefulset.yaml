@@ -7,7 +7,7 @@ spec:
     matchLabels:
       app: {{ .Values.appName }} # has to match .spec.template.metadata.labels
   serviceName: {{ .Values.appName | toString }} 
-  replicas: 2 # by default is 1
+  replicas: {{ .Values.replicaCount }}  # by default is 1
   template:
     metadata:
       labels:
