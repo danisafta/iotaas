@@ -1,22 +1,33 @@
-# SD card
-### 1 Setup RaspberryPI OS lite on each SD card
-### 2. Add ssh file in ```/boot``` partition of each SD card
 
-# Boot
-### 1. After the first boot, change user pi's password
-### 2. Install vim
-### 3. Append ```cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory``` at the end of the FIRST line of ```/boot/cmdline.txt```
-### 4. sudo raspi-config
-#### Under perfomance, change GPU ram to 16MB
-#### Configure WI-FI access
-### 5. ```ssh-copy-id pi@<IP> ```
-# K3S setup
+## Table of Contents
+1. [Setup k3s cluster](#setup)
+2. [Docs](#docs)
+
+
+
+## Setup
+### SD card
+#### 1 Setup RaspberryPI OS lite on each SD card
+#### 2. Add ssh file in ```/boot``` partition of each SD card
+
+
+### Boot
+#### 1. After the first boot, change user pi's password
+#### 2. Install vim
+#### 3. Append ```cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory``` at the end of the FIRST line of ```/boot/cmdline.txt```
+#### 4. sudo raspi-config
+##### Under perfomance, change GPU ram to 16MB
+##### Configure WI-FI access
+#### 5. ```ssh-copy-id pi@<IP> ```
+
+
+### K3S setup
 Install locally:
 - arkade
 - kubectl
 - k3sup
 
-### Tools installation:
+#### Tools installation:
 ```
 curl -sSL https://dl.get-arkade.dev | sudo sh
 arkade get kubectl
@@ -41,14 +52,19 @@ export K3S_TOKEN="K1089729d4ab5e51a44b1871768c7c04ad80bc6319d7bef5d94c7caaf9b0bd
 
 curl -sfL https://get.k3s.io | sh -
 ```
-### Connect to the cluster:
+#### Connect to the cluster:
 
 ```
 export KUBECONFIG=/home/saftone1/kubeconfig
 kubectl config set-context default
 ```
 
-# Docs:
+## Docs:
+### Kubernetes
+#### Secrets
+All the secrets are encoded using openssl base64
+
+### External links
 [Rpi docs & examples](https://leanpub.com/RPiMRE/read#leanpub-auto-record-the-system-information-values)
 
 [Prometheus/Grafana Flask](https://levelup.gitconnected.com/setting-up-a-local-weather-station-using-dht11-docker-prometheus-and-grafana-on-a-raspberry-pi-a5f928addc34)
