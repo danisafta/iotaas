@@ -1,8 +1,8 @@
 from sqlalchemy import Column, String, Integer, Date, Numeric
 from base import Base
 
-class Temperature(Base):
-    __tablename__ = 'temperature'
+class Pressure(Base):
+    __tablename__ = 'pressure'
     
     id=Column(Integer, primary_key=True)
     node_name=Column('node_name', String(32))

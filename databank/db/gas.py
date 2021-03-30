@@ -1,14 +1,14 @@
-from sqlalchemy import Column, String, Integer, Date, Numeric
+from sqlalchemy import Column, String, Integer, Date, Boolean
 from base import Base
 
-class Temperature(Base):
-    __tablename__ = 'temperature'
+class Gas(Base):
+    __tablename__ = 'gas'
     
     id=Column(Integer, primary_key=True)
     node_name=Column('node_name', String(32))
     sensor_id=Column('sensor_id', Integer)
     date=Column('date', Date)
-    value=Column('value', Numeric)
+    value=Column('value', Boolean)
 
     def __init__(self, node_name, sensor_id, date, value):
         self.node_name = node_name
