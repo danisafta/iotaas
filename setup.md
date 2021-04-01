@@ -60,10 +60,47 @@ kubectl config set-context default
 ```
 
 ## Docs:
-### Kubernetes
-#### Secrets
-All the secrets are encoded using openssl base64
+### 1. Kubernetes cluster
+- 1.1 Postgres chart
 
+    It provides a statefulset which allows HA and
+    data persistency for the data stored in Postgres.
+
+    The chart contains a secret which stores the
+    auth and db data.
+
+    It also contains a NodePort service which will
+    allow us to use it using <node-ip>:<node-port>.
+
+    The stateful set deploys 2 replicas of Postgres,
+    each of them will have a PVC automatically
+    provisioned by the local-path StorageClass.
+- 1.2 [WIP] Service chart
+
+    Will contain the resources needed to grab data from RPI's collectors and expose it
+    to the dashboard.
+
+    It is the only component which has access to RPIs.
+
+
+### 2. Databank service
+#### 2.1 Description
+
+Installed under /opt/databank, and uses it owns virtualenv for python.
+Needs the following packages installed:
+- psycopg
+- libpq5
+
+#### 2.2 Components
+##### 2.2.1 DB
+- Contains the models for the data that will be collected.
+- Contains the DB connection logic
+
+##### 2.2.2 Collector
+- Collects the data from each sensor periodically
+- Add the data to the database
+##### 2.2.3 Service
+- Query the Collector and expose the data in the kubernetes cluster
 ### External links
 [Rpi docs & examples](https://leanpub.com/RPiMRE/read#leanpub-auto-record-the-system-information-values)
 
