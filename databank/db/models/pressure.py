@@ -1,5 +1,5 @@
 from sqlalchemy import Column, String, Integer, Date, Numeric
-from base import Base
+from ..base import Base
 
 class Pressure(Base):
     __tablename__ = 'pressure'
