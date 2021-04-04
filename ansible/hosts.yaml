@@ -1,0 +1,8 @@
+[master]
+k8spi.go.ro ansible_user=pi ansible_port=1501
+
+[worker-01]
+k8spi.go.ro ansible_user=pi ansible_port=1502
+
+[worker-02]
+k8spi.go.ro ansible_user=pi ansible_port=1503

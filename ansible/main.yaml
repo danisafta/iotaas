@@ -1,0 +1,11 @@
+---
+- name: Install Python & Dev Tools, Git,Pip
+  hosts: all
+  remote_user: pi
+
+  roles:
+    - common
+    # - mysql
+    # - nginx
+    # - php-fpm
+    # - wordpress
