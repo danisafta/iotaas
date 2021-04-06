@@ -2,6 +2,8 @@ import time
 import board
 import adafruit_dht
 
+
+NR_RETRIES = 5
 dhtDevice = adafruit_dht.DHT11(board.D4, use_pulseio=False)
 
 def temperature_value():
@@ -38,5 +40,11 @@ def pressure_value():
 def gas_value():
     print("[LOG] Collecting GAS data")
 
+def data_average(function):
+    values = [function() for i in range(NR_RETRIES)]
+    values_without_outliers = [ v for v in values if v != 0]
+    
+    return sum(values_without_outliers) / len(values_without_outliers)
+    
 collect_functions = [temperature_value, humidity_value,
                     pressure_value, gas_value]

@@ -1,14 +1,16 @@
 from flask import Blueprint
 
+from .collect_functions import *
+
 sensors_bp = Blueprint('sensors_bp', __name__)
 
 @sensors_bp.route('/temperature', methods = ["GET"])
 def temperature():
-    return "Hello 1!"
+    return str(data_average(temperature_value))
 
 @sensors_bp.route('/humidity', methods = ["GET"])
 def humidity():
-    return "Hello 2!"
+    return str(data_average(humidity_value))
 
 @sensors_bp.route('/pressure', methods = ["GET"])
 def pressure():
