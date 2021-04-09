@@ -7,6 +7,16 @@
     accept_hostkey: yes
     key_file: /home/pi/.ssh/id_rsa
 
+- name: Create Python3.7 venv
+  shell: python3.7 -m venv venv
+  args:
+    chdir: /home/pi/code/databank/collector/
+
+- name: Install requirements
+  shell: ./venv/bin/pip install -r requirements.txt
+  args:
+    chdir: /home/pi/code/databank/collector/
+
 - name: Copy systemd service file to server
   copy:
     src: collector.service
@@ -14,8 +24,6 @@
     owner: root
     group: root
   become: yes
-  notify:
-    - Start collector service
 
 - name: Start collector service
   systemd:
@@ -23,3 +31,6 @@
     state: started
     enabled: yes
   become: yes
+
+- name: Reboot
+  shell: shutdown -r now
