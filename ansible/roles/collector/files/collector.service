@@ -1,0 +1,12 @@
+[Unit]
+Description=Collector service used to monitor and control GPIO devices.
+After=network.target
+
+[Service]
+User=pi
+WorkingDirectory=/home/pi/code
+ExecStart=/home/pi/code/databank/collector/venv/bin/gunicorn --bind 0.0.0.0:5000 --chdir /home/pi/code/databank/collector/  --workers 3 wsgi:app
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

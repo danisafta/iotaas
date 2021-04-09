@@ -6,3 +6,20 @@
     version: master
     accept_hostkey: yes
     key_file: /home/pi/.ssh/id_rsa
+
+- name: Copy systemd service file to server
+  copy:
+    src: collector.service
+    dest: /etc/systemd/system
+    owner: root
+    group: root
+  become: yes
+  notify:
+    - Start collector service
+
+- name: Start collector service
+  systemd:
+    name: collector
+    state: started
+    enabled: yes
+  become: yes
