@@ -13,7 +13,10 @@ clint==0.5.1
 cryptography==2.6.1
 entrypoints==0.3
 Flask==1.1.2
+<<<<<<< HEAD
 Flask-JSON==0.3.4
+=======
+>>>>>>> 6817b70e009cd2c3b4fb9414c051b92c83d11a96
 gunicorn==20.1.0
 idna==2.6
 itsdangerous==1.1.0
