@@ -14,11 +14,12 @@ def temperature_value():
     except RuntimeError as error:
         # Errors happen fairly often, DHT's are hard to read, just keep going
         print(error.args[0])
-        time.sleep(2.0)
+        return temperature,error.args[0]
     except Exception as error:
         dhtDevice.exit()
         raise error
-    return temperature
+        return temperature,error.args[0]
+    return temperature,"OK"
 
 def humidity_value():
     print("[LOG] Collecting HUMIDITY data")
@@ -28,7 +29,7 @@ def humidity_value():
     except RuntimeError as error:
         # Errors happen fairly often, DHT's are hard to read, just keep going
         print(error.args[0])
-        time.sleep(2.0)
+        time.sleep(1.0)
     except Exception as error:
         dhtDevice.exit()
         raise error
@@ -41,10 +42,21 @@ def gas_value():
     print("[LOG] Collecting GAS data")
 
 def data_average(function):
-    values = [function() for i in range(NR_RETRIES)]
-    values_without_outliers = [ v for v in values if v != 0]
+    ''' 
+        Computes the average value of the last NR_RETRIES
+        calls and returns it.
+        If the underlying function/sensor thow an error/
+        exception, it will stop.
+    '''
+    data_sum = 0
+    for i in range(NR_RETRIES):
+        value,rmsg = function()
+        if rmsg is not "OK":
+            return value,rmsg,500
+        else:
+            data_sum += value
+    return data_sum / NR_RETRIES,"OK",200
     
-    return sum(values_without_outliers) / len(values_without_outliers)
     
 collect_functions = [temperature_value, humidity_value,
                     pressure_value, gas_value]
