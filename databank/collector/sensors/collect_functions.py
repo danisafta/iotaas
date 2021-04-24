@@ -29,11 +29,12 @@ def humidity_value():
     except RuntimeError as error:
         # Errors happen fairly often, DHT's are hard to read, just keep going
         print(error.args[0])
-        time.sleep(1.0)
+        return humidity,error.args[0]
     except Exception as error:
         dhtDevice.exit()
         raise error
-    return humidity
+        return humidity,error.args[0]
+    return humidity,"OK"
 
 def pressure_value():
     print("[LOG] Collecting PRESSURE data")

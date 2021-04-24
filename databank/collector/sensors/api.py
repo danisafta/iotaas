@@ -10,14 +10,22 @@ sensors_bp = Blueprint('sensors_bp', __name__)
 def temperature():
     response = {}
     value, rmsg, status= data_average(temperature_value)
+    response['sensor'] = 'DHT11 temperature/humidity sensor'
     response['value'] = value
     response['rmsg'] = rmsg
     response['status_'] = status
     return response
 
 @sensors_bp.route('/humidity', methods = ["GET"])
+@as_json
 def humidity():
-    return str(data_average(humidity_value))
+    response = {}
+    value, rmsg, status= data_average(humidity_value)
+    response['sensor'] = 'DHT11 temperature/humidity sensor'
+    response['value'] = value
+    response['rmsg'] = rmsg
+    response['status_'] = status
+    return response
 
 @sensors_bp.route('/pressure', methods = ["GET"])
 def pressure():
