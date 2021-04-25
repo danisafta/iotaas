@@ -5,7 +5,6 @@ metadata:
   labels:
     app: {{ .Values.appName }}
 spec:
-  type: NodePort
   ports:
    - port: 5432
   selector:
