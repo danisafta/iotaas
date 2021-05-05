@@ -23,7 +23,8 @@ for i in range(MAX_MASTERS):
     if ip:
         _masters.append({
             'name':  'MASTER'  + str(i),
-            'ip': ip
+            'ip': ip,
+            'id': i
         })
 
 _workers = []
@@ -32,8 +33,12 @@ for i in range(MAX_WORKERS):
     if ip:
         _workers.append({
             'name':  'WORKER'  + str(i),
-            'ip': ip
+            'ip': ip,
+            'id' : i
         })
 all_nodes = _workers + _masters
 CLUSTER['masters'] = _masters
 CLUSTER['workers'] = _workers
+
+
+enabled_sensors = ['temperature', 'humidity']

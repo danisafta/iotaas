@@ -7,12 +7,11 @@ from db.models.humidity import Humidity
 from db.models.pressure import Pressure
 from db.models.temperature import Temperature
 from db.base import Base, Session, engine
-from db.conf import CLUSTER,all_nodes
+from db.conf import CLUSTER, all_nodes, enabled_sensors
 
 Base.metadata.create_all(engine)
 
 session = Session()
-enbled_sensors = ['temperature','humidity']
 
 
 def insert(payload: dict, node_name: str, sensor: str) -> bool:
@@ -41,26 +40,33 @@ def check_response(response) -> bool:
 
     return True
 
+def check_node_type(node: dict) -> str:
+    if node['id'] % 2 == 1:
+        return 'sensors'
+    return 'controller'
 
 def scrape(sensor: str) -> None:
     ''' 
         Scrapes the sensor on all of the nodes
         in the cluster and inserts the value in the db
     '''
-    
+
     for node in all_nodes:
         node_ip = node['ip']
         node_name = node['name']
-        print("[LOG] Scrapping " + sensor + " from " + node_name)
-        URL = 'http://' + node_ip + ':5000/sensors/' + sensor
-        response = requests.get(URL)
+        
+        if check_node_type(node) == 'sensors':
+            print("[LOG] Scrapping " + sensor + " from " + node_name)
+            
+            URL = 'http://' + node_ip + ':5000/sensors/' + sensor
+            response = requests.get(URL)
 
-        # Valid response, insert it
-        if check_response(response):
-            insert(response.json(), node_name, sensor)
+            # Valid response, insert it
+            if check_response(response):
+                insert(response.json(), node_name, sensor)
 
 
-for on_sensor in enbled_sensors:
+for on_sensor in enabled_sensors:
     scrape(on_sensor)
 
 session.commit()
