@@ -28,6 +28,8 @@
         </figure>
 
         <h3 class="is-size-4">{{ sensor.name }}</h3>
+
+        <router-link v-bind:to="sensor.get_absolute_url" class="button is-dark mt-4">View measurements</router-link>
       </div>
 </div>
     </div>
