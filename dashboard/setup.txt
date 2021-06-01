@@ -1,0 +1,52 @@
+Install and setup for Django
+
+pyhton3 -m venv ./venv
+source venv/bin/activate
+pip install django
+pip install django-rest-framework
+pip install django-cors-headers
+pip install djoser
+pip install pillow
+pip install stripe
+
+Am creat proiectul cu django-admin startproject fog_computing_django
+Am creat django app pt senzori cu python manage.py startapp sensor
+
+slug- adresa
+
+- Added Category and Sensor models
+
+python manage.py makemigrations
+python manage.py migrate
+
+python manage.py runserver
+
+- Created django app and models for sensors
+- Added serializer and view set for sensors
+- Added Add category and Add Sensor features
+ to the admin page
+
+
+
+
+
+
+
+
+Install and setup for Vue
+
+npm install -g @vue/cli
+
+Am creat proiectul cu vue create fog_computing_vue
+cd in proiect
+
+npm install axios
+npm install bulma
+ 
+npm run serve
+
+- Included font-awesome
+
+- Created vue template with home page and about page
+- Added feature for mobile menu button
+
