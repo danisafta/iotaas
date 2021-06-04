@@ -33,11 +33,13 @@ export default {
         this.getSensor()
     },
     methods: {
-        getSensor() {
+        async getSensor() {
+            this.$store.commit('setIsLoading', true)
+
             const category_slug = this.$route.params.category_slug
             const sensor_slug = this.$route.params.sensor_slug
 
-            axios
+            await axios
             .get(`/api/v1/sensors/${category_slug}/${sensor_slug}`)
             .then(response => {
                 this.sensor = response.data
@@ -45,6 +47,8 @@ export default {
             .catch(error => {
                 console.log(error)
             })
+
+            this.$store.commit('setIsLoading', false)
         }
     }
 }
