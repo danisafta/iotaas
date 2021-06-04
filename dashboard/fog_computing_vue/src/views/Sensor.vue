@@ -43,6 +43,8 @@ export default {
             .get(`/api/v1/sensors/${category_slug}/${sensor_slug}`)
             .then(response => {
                 this.sensor = response.data
+
+                document.title = this.sensor.name
             })
             .catch(error => {
                 console.log(error)

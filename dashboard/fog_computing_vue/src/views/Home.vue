@@ -50,6 +50,8 @@ export default {
   },
   mounted() {
     this.getSensorsList()
+
+    document.title = 'Home'
   },
   methods: {
     async getSensorsList() {
