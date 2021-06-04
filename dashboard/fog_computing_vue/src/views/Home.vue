@@ -52,8 +52,10 @@ export default {
     this.getSensorsList()
   },
   methods: {
-    getSensorsList() {
-      axios
+    async getSensorsList() {
+      this.$store.commit('setIsLoading', true)
+
+      await axios
       .get('/api/v1/sensors-list/')
       .then(response => {
         this.sensorsList = response.data
@@ -61,6 +63,8 @@ export default {
       .catch(error => {
         console.log(error)
       })
+
+      this.$store.commit('setIsLoading', false)
     }
   }
 }
