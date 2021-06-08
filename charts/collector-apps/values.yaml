@@ -2,13 +2,14 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-name: scrapper
+name: collector-services
 
-image:
-  repository: saftone1/collector-service-scrapper
+images:
+  cssrepository: saftone1/collector-service-scrapper
+  cserepository: saftone1/collector-service-exposer
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "latest"
 
 imagePullSecrets: []
 nameOverride: ""

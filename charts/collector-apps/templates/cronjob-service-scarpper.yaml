@@ -4,15 +4,15 @@ kind: CronJob
 metadata:
   name:  {{ .Values.name }}-cronjob
 spec:
-  schedule: '@daily'
+  schedule: '@hourly'
   jobTemplate:
     spec:
       template:
         spec:
           containers:
           - name: {{ .Values.name }}
-            image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-            imagePullPolicy: {{ .Values.image.pullPolicy }}
+            image: "{{ .Values.images.cssrepository }}:{{ .Values.images.tag | default .Chart.AppVersion }}"
+            imagePullPolicy: {{ .Values.images.pullPolicy }}
             env:
             - name: MASTER1
               value: 192.168.100.50
