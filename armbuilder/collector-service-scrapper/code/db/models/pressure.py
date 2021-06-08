@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, Date, Numeric
+from sqlalchemy import Column, String, Integer, DateTime, Numeric
 from ..base import Base
 
 class Pressure(Base):
@@ -7,7 +7,7 @@ class Pressure(Base):
     id=Column(Integer, primary_key=True)
     node_name=Column('node_name', String(32))
     sensor_id=Column('sensor_id', Integer)
-    date=Column('date', Date)
+    date=Column('date', DateTime)
     value=Column('value', Numeric)
 
     def __init__(self, node_name, sensor_id, date, value):

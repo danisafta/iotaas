@@ -4,7 +4,7 @@ import os
 POSTGRES_DB = os.getenv('POSTGRES_DB')
 POSTGRES_USER = os.getenv('POSTGRES_USER')
 POSTGRES_PW = os.getenv('POSTGRES_PW')
-POSTGRES_URL = 'postgresql://' + POSTGRES_USER + ':' + POSTGRES_PW +'@postgres:5432/' + POSTGRES_DB
+POSTGRES_URL = 'postgresql://' + POSTGRES_USER + ':' + POSTGRES_PW +'@192.168.100.52:32222/' + POSTGRES_DB
 
 # Cluster config
 # type = MW (master-worker). eg: 22 : 2 master, 2 workers
