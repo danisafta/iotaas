@@ -31,7 +31,7 @@
 
         <router-link v-bind:to="sensor.get_absolute_url" class="button is-dark mt-4">View measurements</router-link>
       </div>
-</div>
+      </div>
     </div>
   </div>
 </template>

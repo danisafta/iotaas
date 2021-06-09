@@ -4,8 +4,8 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from .models import Sensor
-from .serializers import SensorSerializer
+from .models import Sensor, Category
+from .serializers import SensorSerializer, CategorySerializer
 
 class SensorsList(APIView):
     def get(self, request, format=None):
@@ -23,4 +23,16 @@ class SensorsDetail(APIView):
     def get(self, request, category_slug,sensor_slug, format=None):
         sensor = self.get_object(category_slug, sensor_slug)
         serializer = SensorSerializer(sensor)
+        return Response(serializer.data)
+
+class CategoryDetail(APIView):
+    def get_object(self, category_slug):
+        try:
+            return Category.objects.get(slug=category_slug)
+        except Sensor.DoesNotExist:
+            raise Http404
+
+    def get(self, request, category_slug, format=None):
+        category = self.get_object(category_slug)
+        serializer = CategorySerializer(category)
         return Response(serializer.data)

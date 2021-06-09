@@ -10,7 +10,18 @@ class SensorSerializer(serializers.ModelSerializer):
             "name",
             "get_absolute_url",
             "description",
-            "price",
             "get_image",
             "get_thumbnail"
+        )
+
+class CategorySerializer(serializers.ModelSerializer):
+    sensors = SensorSerializer(many=True)
+
+    class Meta:
+        model = Category
+        fields = (
+            "id",
+            "name",
+            "get_absolute_url",
+            "sensors",
         )
