@@ -12,6 +12,25 @@
       </div>
 
       <div class="navbar-menu" id="navbar-menu" v-bind:class="{'is-active': showMobileMenu }">
+        <div class="navbar-start">
+          <div class="navbar-item">
+            <form method="get" action="/search">
+            <div class="field has-addons">
+              <div class="control">
+                <input type="text" class="input" placeholder="what are you looking for?" name="query">
+              </div>
+
+              <div class="control">
+                <button class="button is-success">
+                  <span class="icon">
+                    <i class="fas fa-search"></i>
+                  </span>
+                </button>
+              </div>
+            </div>
+            </form>
+          </div>
+        </div>
         <div class="navbar-end">
           <router-link to="/temperature" class="navbar-item">Temperature</router-link>
           <router-link to="/humidity" class="navbar-item">Humidity</router-link>
@@ -19,10 +38,10 @@
           <div class="navbar-item">
             <div class="buttons">
               <router-link to="/log-in" class="button is-light">Log in</router-link>
-              <router-link to="/cart" class="button is-success">
+              <!-- <router-link to="/cart" class="button is-success">
                 <span class="icon"><i class="fas fa-shopping-cart"></i></span>
                 <span>Cart</span>
-              </router-link>
+              </router-link> -->
             </div>
           </div>      
         </div>
