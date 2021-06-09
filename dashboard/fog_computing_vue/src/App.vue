@@ -14,7 +14,7 @@
       <div class="navbar-menu" id="navbar-menu" v-bind:class="{'is-active': showMobileMenu }">
         <div class="navbar-end">
           <router-link to="/temperature" class="navbar-item">Temperature</router-link>
-          <router-link to="/temperature" class="navbar-item">Humidity</router-link>
+          <router-link to="/humidity" class="navbar-item">Humidity</router-link>
 
           <div class="navbar-item">
             <div class="buttons">
