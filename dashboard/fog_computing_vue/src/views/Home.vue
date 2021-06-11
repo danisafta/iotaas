@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <section class="hero is-medium is-dark mb-6">
+    <section class="hero is-medium is-dark is-bold mb-6">
         <div class="hero-body has-text-centered">
             <p class="title mb-6">
                 Fog Computing Platform
@@ -12,14 +12,16 @@
     </section>
 
     <div class="columns is-multiline">
-      <div class="column is-12">
-          <h2 class="is-size-2 has-text-centered">Sensors</h2>
-      </div>
+      <template v-if="$store.state.isAuthenticated">
+        <div class="column is-12">
+            <h2 class="is-size-2 has-text-centered">Sensors</h2>
+        </div>
 
-      <SensorBox
-        v-for="sensor in sensorsList"
-        v-bind:key="sensor.id"
-        v-bind:sensor="sensor" />
+        <SensorBox
+          v-for="sensor in sensorsList"
+          v-bind:key="sensor.id"
+          v-bind:sensor="sensor" />
+      </template>
     </div>
   </div>
 </template>
