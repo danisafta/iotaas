@@ -1,6 +1,8 @@
+from dataclasses import dataclass
 from sqlalchemy import Column, String, Integer, Date, Numeric
 from ..base import Base
 
+@dataclass
 class Temperature(Base):
     __tablename__ = 'temperature'
     

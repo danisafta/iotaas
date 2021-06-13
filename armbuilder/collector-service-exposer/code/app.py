@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 from db.base import scrape
 
 from db.models.humidity import Humidity
@@ -15,15 +15,17 @@ app = Flask(__name__)
 
 @app.route('/temperature/stored/<records>', methods=["GET"])
 def stored_temperature(records):
-
     temperatures = session.query(Temperature).all()
-    for temp in temperatures:
-        print(temp)
-
-    return {
-        'sensor_info': "sensor_info",
-        'sensor_value': "sensor_value"
-    }
+    nr = int(records)
+    result = []
+    for temp in temperatures[:nr]:
+        result.append({
+            'value': float(temp.value),
+            'node_name': temp.node_name,
+            'sensor_info': temp.sensor_info,
+            'date': temp.date
+        })
+    return jsonify(result)
 
 
 @app.route('/temperature/<node>', methods=["GET"])
@@ -43,6 +45,20 @@ def humidity(node):
         'sensor_value': sensor_value
     }
 
+
+@app.route('/humidity/stored/<records>', methods=["GET"])
+def stored_humidity(records):
+    humidities = session.query(Humidity).all()
+    nr = int(records)
+    result = []
+    for humidity in humidities[:nr]:
+        result.append({
+            'value': float(humidity.value),
+            'node_name': humidity.node_name,
+            'sensor_info': humidity.sensor_info,
+            'date': humidity.date
+        })
+    return jsonify(result)
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5000)
