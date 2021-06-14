@@ -11,7 +11,9 @@ class SensorSerializer(serializers.ModelSerializer):
             "get_absolute_url",
             "description",
             "get_image",
-            "get_thumbnail"
+            "get_thumbnail",
+            "node"
+            # "get_measurement"
         )
 
 class CategorySerializer(serializers.ModelSerializer):
