@@ -7,7 +7,7 @@ name: collector-services
 images:
   cssrepository: saftone1/collector-service-scrapper
   cserepository: saftone1/collector-service-exposer
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 

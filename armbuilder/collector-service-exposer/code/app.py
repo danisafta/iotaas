@@ -33,6 +33,7 @@ def temperature(node):
     sensor_info, sensor_value = scrape('temperature', node)
     return {
         'sensor_info': sensor_info,
+        'node_name': node,
         'sensor_value': sensor_value
     }
 
@@ -42,6 +43,7 @@ def humidity(node):
     sensor_info, sensor_value = scrape('humidity', node)
     return {
         'sensor_info': sensor_info,
+        'node_name': node,
         'sensor_value': sensor_value
     }
 
