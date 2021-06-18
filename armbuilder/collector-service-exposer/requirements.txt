@@ -10,3 +10,4 @@ zipp==3.4.1
 psycopg2==2.8.6
 requests==2.25.1
 SQLAlchemy==1.4.11
+Flask-Cors==3.0.10

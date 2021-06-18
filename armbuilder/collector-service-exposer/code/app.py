@@ -4,14 +4,14 @@ from db.base import scrape
 from db.models.humidity import Humidity
 from db.models.pressure import Pressure
 from db.models.temperature import Temperature
-
+from flask_cors import CORS
 
 from db.base import Session
 
 session = Session()
 
 app = Flask(__name__)
-
+CORS(app)
 
 @app.route('/temperature/stored/<records>', methods=["GET"])
 def stored_temperature(records):
