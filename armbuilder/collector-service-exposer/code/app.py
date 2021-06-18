@@ -2,7 +2,7 @@ from flask import Flask, jsonify
 from db.base import scrape
 
 from db.models.humidity import Humidity
-from db.models.pressure import Pressure
+from db.models.event import Event
 from db.models.temperature import Temperature
 from flask_cors import CORS
 
@@ -59,6 +59,22 @@ def stored_humidity(records):
             'node_name': humidity.node_name,
             'sensor_info': humidity.sensor_info,
             'date': humidity.date
+        })
+    return jsonify(result)
+
+
+@app.route('/events/stored/<records>', methods=["GET"])
+def events(records):
+    events = session.query(Event).all()
+    nr = int(records)
+    result = []
+    events.reverse()
+    for event in events[:nr]:
+        result.append({
+            'node_name': event.node_name,
+            'sensor_info': event.sensor_id,
+            'date': event.date,
+            'event_info': event.event_info
         })
     return jsonify(result)
 
