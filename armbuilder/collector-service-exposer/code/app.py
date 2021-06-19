@@ -72,11 +72,11 @@ def events(records):
     for event in events[:nr]:
         result.append({
             'node_name': event.node_name,
-            'sensor_info': event.sensor_id,
+            'sensor_info': event.sensor,
             'date': event.date,
             'event_info': event.event_info
         })
     return jsonify(result)
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5000)
