@@ -14,14 +14,13 @@ session = Session()
 
 @app.route('/event', methods=["POST"])
 def register_event():
-    data = request.form
-    sensor_id = data.get('sensor_id')
+    data = request.get_json()
+    sensor = data.get('sensor')
     node_name = data.get('node_name')
     event_info = data.get('event_info')
-    values =  data.get('values')
+    values =  bool(data.get('values'))
     date = datetime.now()
-    
-    event = Event(node_name, sensor_id, date, values, event_info)
+    event = Event(node_name, sensor, date, values, event_info)
     session.add(event)
     session.commit()
     return jsonify("Event was sucessfully registered")
