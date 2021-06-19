@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, Date, Boolean
+from sqlalchemy import Column, String, Integer,  Boolean
 from sqlalchemy.sql.sqltypes import DateTime
 from ..base import Base
 
@@ -7,17 +7,17 @@ class Event(Base):
     
     id=Column(Integer, primary_key=True)
     node_name =Column('node_name', String(32))
-    sensor_id =Column('sensor_id', Integer)
+    sensor =Column('sensor', String(32))
     date=Column('date', DateTime)
-    values=Column('values', Boolean)
-    event_info=Column('values', String(256))
+    value=Column('value', Boolean)
+    event_info=Column('info', String(256))
     
 
-    def __init__(self, node_name, sensor_id, date, value, event_info):
+    def __init__(self, node_name, sensor, date, value, event_info):
         self.node_name = node_name
-        self.sensor_id = sensor_id
+        self.sensor = sensor
         self.date = date
-        self.values = value
+        self.value = value
         self.event_info = event_info
 
     def __str__(self):
