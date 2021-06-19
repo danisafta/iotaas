@@ -1,0 +1,12 @@
+[Unit]
+Description=Service for delivering time-critical informations to the Events API in k8s
+After=network.target
+
+[Service]
+User=pi
+WorkingDirectory=/home/pi/code/databank
+ExecStart=python3 criticals.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
