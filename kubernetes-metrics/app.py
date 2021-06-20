@@ -61,7 +61,6 @@ def get_applications():
             'app_name': i.metadata.name,
             'node_name': i.spec.node_name,
             'namespace': i.metadata.namespace,
-            'state': i.metadata.namespace
         }
         result.append(app)
     return result

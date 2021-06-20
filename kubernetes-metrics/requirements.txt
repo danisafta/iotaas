@@ -2,7 +2,6 @@ cachetools==4.2.2
 certifi==2021.5.30
 chardet==4.0.0
 click==8.0.1
-dataclasses==0.8
 Flask==2.0.1
 Flask-Cors==3.0.10
 google-auth==1.31.0
@@ -13,7 +12,6 @@ Jinja2==3.0.1
 kubernetes==17.17.0
 MarkupSafe==2.0.1
 oauthlib==3.1.1
-pkg-resources==0.0.0
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 python-dateutil==2.8.1
