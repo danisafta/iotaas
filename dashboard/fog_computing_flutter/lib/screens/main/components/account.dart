@@ -37,7 +37,7 @@ class _AccountState extends State<Account> {
     var screenSize = MediaQuery.of(context).size;
     return Material(
       child: Scaffold(
-        backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: primaryColor,
         extendBodyBehindAppBar: true,
         appBar: Responsive.isMobile(context)
             ? AppBar(
@@ -56,9 +56,9 @@ class _AccountState extends State<Account> {
                   ),
                 ],
                 title: Text(
-                  'EXPLORE',
+                  'Fog Computing Platform',
                   style: TextStyle(
-                    color: Colors.blueGrey[100],
+                    color: primaryColor,
                     fontSize: 20,
                     fontFamily: 'Montserrat',
                     fontWeight: FontWeight.w400,
@@ -68,7 +68,7 @@ class _AccountState extends State<Account> {
               )
             : PreferredSize(
                 preferredSize: Size(screenSize.width, 1000),
-                child: TopBarContents(_opacity),
+                child: AuthDialog(),
               ),
       ),
     );

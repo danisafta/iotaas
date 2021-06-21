@@ -1,5 +1,6 @@
 import 'package:admin/controllers/MenuController.dart';
 import 'package:admin/responsive.dart';
+import 'package:admin/utils/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -35,11 +36,30 @@ class Header extends StatelessWidget {
   }
 }
 
-class ProfileCard extends StatelessWidget {
+class ProfileCard extends StatefulWidget {
   const ProfileCard({
     Key? key,
   }) : super(key: key);
 
+  @override
+  _ProfileCardState createState() => _ProfileCardState();
+
+}
+
+class _ProfileCardState extends State<ProfileCard> {
+
+  final List _isHovering = [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ];
+
+  bool _isProcessing = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -62,18 +82,64 @@ class ProfileCard extends StatelessWidget {
           Icon(Icons.account_circle_outlined),
 
           if (!Responsive.isMobile(context))
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
-              child: Text("My Account"),
-            ),
+            // Padding(
+            //   padding:
+            //       const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
+            //   child: Text("My Account"),
+            // ),
           // Icon(Icons.keyboard_arrow_down),
-          IconButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Account()));
-              },
-              icon: const Icon(Icons.keyboard_arrow_down))
+          // IconButton(
+          //     onPressed: () {
+          //       Navigator.push(context,
+          //           MaterialPageRoute(builder: (context) => Account()));
+          //     },
+          //     icon: const Icon(Icons.keyboard_arrow_down))
+
+          SizedBox(width: 10),
+          TextButton(
+            style: TextButton.styleFrom(
+              primary: Colors.blueGrey,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+            ),
+            onPressed: _isProcessing
+                ? null
+                : () async {
+              setState(() {
+                _isProcessing = true;
+              });
+              await signOut().then((result) {
+                print(result);
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    fullscreenDialog: true,
+                    builder: (context) => Account(),
+                  ),
+                );
+              }).catchError((error) {
+                print('Sign Out Error: $error');
+              });
+              setState(() {
+                _isProcessing = false;
+              });
+            },
+            child: Padding(
+              padding: EdgeInsets.only(
+                top: 8.0,
+                bottom: 8.0,
+              ),
+              child: _isProcessing
+                  ? CircularProgressIndicator()
+                  : Text(
+                'Sign out',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );

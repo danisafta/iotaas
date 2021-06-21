@@ -41,6 +41,7 @@ dependencies:
   charts_flutter: ^0.10.0
   contained_tab_bar_view: ^0.8.0
   keyboard_actions: ^3.3.1+1
+  flutter_signin_button: ^1.0.0
 
 dev_dependencies:
   flutter_test:

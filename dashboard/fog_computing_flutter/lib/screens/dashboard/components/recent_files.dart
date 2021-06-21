@@ -1,19 +1,15 @@
 import 'package:admin/models/MyFiles.dart';
-import 'package:admin/screens/dashboard/components/header.dart';
-import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/widgets.dart';
 import '../../../constants.dart';
-import 'dart:async';
-import 'package:admin/responsive.dart';
-import  'package:keyboard_actions/keyboard_actions.dart';
 
+var x = 10;
 
 Future<List<RecentSensor>> fetchRecent() async {
-  var url = 'http://k8spi.go.ro:8080/temperature/stored/10';
+  var url = 'http://k8spi.go.ro:8080/temperature/stored/' + x.toString();
   List nodes = [];
   var response;
   List<RecentSensor> sensors = [];
@@ -102,11 +98,6 @@ class RecentHumidity {
   }
 }
 
-
-
-
-
-
 Future<List<RecentEvents>> fetchRecentEvents() async {
   var url = 'http://k8spi.go.ro:8080/events/stored/10';
   List nodes = [];
@@ -152,12 +143,6 @@ class RecentEvents {
   }
 }
 
-
-
-
-
-
-
 class RecentFiles extends StatefulWidget {
   RecentFiles({Key? key}) : super(key: key);
 
@@ -172,7 +157,7 @@ class _RecentFilesState extends State<RecentFiles>
   late Future<List<RecentEvents>> futureRecentEvents;
 
   late TabController _controller;
-  final myController = TextEditingController();
+
   int _selectedIndex = 0;
 
   List<Widget> list = [
@@ -213,19 +198,6 @@ class _RecentFilesState extends State<RecentFiles>
             "Recent Measurements",
             style: Theme.of(context).textTheme.subtitle1,
           ),
-
-
-
-          TextField(
-            controller: myController,
-          ),
-
-
-
-
-
-
-
           DefaultTabController(
             length: list.length, // length of tabs
             child: Column(

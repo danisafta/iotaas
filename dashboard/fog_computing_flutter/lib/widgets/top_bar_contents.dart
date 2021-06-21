@@ -3,7 +3,6 @@ import 'package:admin/screens/main/components/account.dart';
 import 'package:admin/utils/authentication.dart';
 import 'package:admin/widgets/auth_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 class TopBarContents extends StatefulWidget {
   final double opacity;

@@ -1,5 +1,4 @@
 import 'package:admin/screens/main/components/account.dart';
-import 'package:admin/screens/main/main_screen.dart';
 import 'package:admin/utils/authentication.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -68,7 +67,7 @@ class _GoogleButtonState extends State<GoogleButton> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Image(
-                        image: AssetImage("assets/images/logo.png"),
+                        image: AssetImage("assets/images/google_logo.png"),
                         height: 30.0,
                       ),
                       Padding(

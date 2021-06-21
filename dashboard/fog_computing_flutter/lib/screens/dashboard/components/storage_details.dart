@@ -28,7 +28,6 @@ Future<List<NodeDetails>> fetchDetails() async {
 
     for (var i = 0; i < values.length; i++) {
       details.add(NodeDetails.fromJson(values[i]));
-      print(details[i].node_name);
     }
   } else {
     // If the server did not return a 200 OK response,s
@@ -131,17 +130,17 @@ class _StorageDetailsState extends State<StorageDetails> {
                   StorageInfoCard(
                     svgSrc: "assets/icons/raspberry.svg",
                     title: "MASTER1",
-                    numOfApps: data![0].apps,
+                    numOfApps: data[0].apps,
                   ),
                   StorageInfoCard(
                     svgSrc: "assets/icons/raspberry.svg",
                     title: "WORKER1",
-                    numOfApps: data![1].apps,
+                    numOfApps: data[1].apps,
                   ),
                   StorageInfoCard(
                     svgSrc: "assets/icons/raspberry.svg",
                     title: "WORKER2",
-                    numOfApps: data![2].apps,
+                    numOfApps: data[2].apps,
                   ),
                 ],
               );

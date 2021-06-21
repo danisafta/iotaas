@@ -21,7 +21,6 @@ Future<List<NodeDetails>> fetchDetails() async {
 
     for (var i = 0; i < values.length; i++) {
       details.add(NodeDetails.fromJson(values[i]));
-      print(details[i].node_name);
     }
 
   } else {
@@ -147,9 +146,9 @@ class _FileInfoCardState extends State<FileInfoCard> {
                                   ),
                                 ),
                                 Text("Node Name: "  + data!.node_name, textAlign: TextAlign.center),
-                                Text("IP address: " + data!.ip, textAlign: TextAlign.center),
-                                Text("Architecture: " + data!.arch, textAlign: TextAlign.center),
-                                Text("Operating System: " + data!.os, textAlign: TextAlign.center),
+                                Text("IP address: " + data.ip, textAlign: TextAlign.center),
+                                Text("Architecture: " + data.arch, textAlign: TextAlign.center),
+                                Text("Operating System: " + data.os, textAlign: TextAlign.center),
                   ]
                         ),
                       );

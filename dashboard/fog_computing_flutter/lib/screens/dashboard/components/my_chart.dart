@@ -25,7 +25,6 @@ Future<List<NodeDetails>> fetchChartDetails() async {
 
     for (var i = 0; i < values.length; i++) {
       details.add(NodeDetails.fromJson(values[i]));
-      print(details[i].node_name);
     }
   } else {
     // If the server did not return a 200 OK response,
