@@ -1,6 +1,10 @@
+import 'package:admin/controllers/MenuController.dart';
+import 'package:admin/screens/main/components/applications.dart';
+import 'package:admin/screens/main/plot_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:admin/screens/main/components/measurements.dart';
+import 'package:provider/provider.dart';
 
 class SideMenu extends StatelessWidget {
   const SideMenu({
@@ -33,13 +37,29 @@ class SideMenu extends StatelessWidget {
             svgSrc: "assets/icons/menu_task.svg",
             press: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Measurements()));
+                  MaterialPageRoute(builder: (context) {
+                    return MultiProvider(
+                      providers: [
+                        ChangeNotifierProvider(
+                          create: (context) => MenuController(),
+                        ),
+                      ],
+                      child: PlotScreen(),
+                    );}));
             },
           ),
           DrawerListTile(
             title: "Actions",
             svgSrc: "assets/icons/menu_notification.svg",
             press: () {},
+          ),
+          DrawerListTile(
+            title: "Applications",
+            svgSrc: "assets/icons/menu_store.svg",
+            press: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Applications()));
+            },
           ),
           DrawerListTile(
             title: "Settings",

@@ -1,3 +1,5 @@
+// @dart=2.9
+
 import 'package:admin/constants.dart';
 import 'package:admin/controllers/MenuController.dart';
 import 'package:admin/screens/main/main_screen.dart';

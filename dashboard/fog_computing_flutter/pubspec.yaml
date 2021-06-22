@@ -30,7 +30,7 @@ dependencies:
 
   google_fonts: ^2.1.0
   flutter_svg: ^0.22.0
-  fl_chart: ^0.36.1
+#  fl_chart: ^0.36.1
   provider: ^5.0.0
   shared_preferences: ^2.0.5
   google_sign_in: ^5.0.1
@@ -42,6 +42,8 @@ dependencies:
   contained_tab_bar_view: ^0.8.0
   keyboard_actions: ^3.3.1+1
   flutter_signin_button: ^1.0.0
+  fl_chart: ^0.36.2
+  syncfusion_flutter_charts: ^19.1.69
 
 dev_dependencies:
   flutter_test:

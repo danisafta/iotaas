@@ -118,21 +118,21 @@ class _MyChartState extends State<MyChart> {
           List<PieChartSectionData> paiChartSelectionDatas = [
               PieChartSectionData(
                 title: "MASTER1",
-                color: primaryColor,
+                color: Colors.purpleAccent,
                 value: snapshot.data![0].apps,
                 showTitle: true,
                 radius: 22,
               ),
               PieChartSectionData(
                 title: "WORKER1",
-                color: Color(0xFF26E5FF),
+                color: Colors.red.shade200,
                 value: snapshot.data![1].apps,
                 showTitle: true,
                 radius: 25,
               ),
               PieChartSectionData(
                 title: "WORKER2",
-                color: Color(0xFFFFCF26),
+                color: Colors.pinkAccent.shade700,
                 value: snapshot.data![2].apps,
                 showTitle: true,
                 radius: 19,
@@ -142,6 +142,7 @@ class _MyChartState extends State<MyChart> {
 
           child:
           return PieChart(
+
             PieChartData(
               sectionsSpace: 0,
               centerSpaceRadius: 70,
