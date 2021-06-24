@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import '../../constants.dart';
 import 'components/header.dart';
 
-import 'components/recent_files.dart';
-import 'components/storage_details.dart';
+import 'components/recent_measurements.dart';
+import 'components/node_apps_details.dart';
 
 class DashboardScreen extends StatefulWidget {
   @override
@@ -30,12 +30,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   flex: 5,
                   child: Column(
                     children: [
-                      MyFiles(),
+                      MyFields(),
                       SizedBox(height: defaultPadding),
-                      RecentFiles(),
+                      RecentMeasurements(),
                       if (Responsive.isMobile(context))
                         SizedBox(height: defaultPadding),
-                      if (Responsive.isMobile(context)) StorageDetails(),
+                      if (Responsive.isMobile(context)) NodeAppsDetails(),
                     ],
                   ),
                 ),
@@ -45,7 +45,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 if (!Responsive.isMobile(context))
                   Expanded(
                     flex: 2,
-                    child: StorageDetails(),
+                    child: NodeAppsDetails(),
                   ),
               ],
             )

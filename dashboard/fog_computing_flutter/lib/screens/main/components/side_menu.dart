@@ -1,9 +1,10 @@
 import 'package:admin/controllers/MenuController.dart';
+import 'package:admin/screens/main/components/actions.dart';
 import 'package:admin/screens/main/components/applications.dart';
 import 'package:admin/screens/main/plot_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:admin/screens/main/components/measurements.dart';
+import 'package:admin/screens/main/components/live_measurements.dart';
 import 'package:provider/provider.dart';
 
 class SideMenu extends StatelessWidget {
@@ -17,19 +18,16 @@ class SideMenu extends StatelessWidget {
       child: ListView(
         children: [
           DrawerHeader(
-            child: Image.asset("assets/images/logo.png"),
+            child: Center(child: Text("Fog Computing Platform",style: TextStyle(color: Colors.white))),
+            // child: Image.asset("assets/images/res.png"),
           ),
-          DrawerListTile(
-            title: "Dashboard",
-            svgSrc: "assets/icons/menu_dashbord.svg",
-            press: () {},
-          ),
+
           DrawerListTile(
             title: " Live Measurement",
             svgSrc: "assets/icons/menu_tran.svg",
             press: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Measurements()));
+                  MaterialPageRoute(builder: (context) => LiveMeasurements()));
             },
           ),
           DrawerListTile(
@@ -51,7 +49,10 @@ class SideMenu extends StatelessWidget {
           DrawerListTile(
             title: "Actions",
             svgSrc: "assets/icons/menu_notification.svg",
-            press: () {},
+            press: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => MyActions()));
+            },
           ),
           DrawerListTile(
             title: "Applications",
@@ -60,11 +61,6 @@ class SideMenu extends StatelessWidget {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => Applications()));
             },
-          ),
-          DrawerListTile(
-            title: "Settings",
-            svgSrc: "assets/icons/menu_setting.svg",
-            press: () {},
           ),
         ],
       ),

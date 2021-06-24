@@ -6,7 +6,7 @@ import 'package:admin/widgets/top_bar_contents.dart';
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import '../../../constants.dart';
 import 'package:admin/screens/dashboard/components/chart.dart';
-import 'package:admin/screens/dashboard/components/storage_info_card.dart';
+import 'package:admin/screens/dashboard/components/node_apps_card.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 class Account extends StatefulWidget {

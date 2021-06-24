@@ -3,10 +3,10 @@ import 'package:admin/responsive.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
-import 'file_info_card.dart';
+import 'node_details_card.dart';
 
-class MyFiles extends StatelessWidget {
-  const MyFiles({
+class MyFields extends StatelessWidget {
+  const MyFields({
     Key? key,
   }) : super(key: key);
 
@@ -22,18 +22,18 @@ class MyFiles extends StatelessWidget {
               "Nodes",
               style: Theme.of(context).textTheme.subtitle1,
             ),
-            ElevatedButton.icon(
-              style: TextButton.styleFrom(
-                padding: EdgeInsets.symmetric(
-                  horizontal: defaultPadding * 1.5,
-                  vertical:
-                      defaultPadding / (Responsive.isMobile(context) ? 2 : 1),
-                ),
-              ),
-              onPressed: () {},
-              icon: Icon(Icons.add),
-              label: Text("Add New"),
-            ),
+            // ElevatedButton.icon(
+            //   style: TextButton.styleFrom(
+            //     padding: EdgeInsets.symmetric(
+            //       horizontal: defaultPadding * 1.5,
+            //       vertical:
+            //           defaultPadding / (Responsive.isMobile(context) ? 2 : 1),
+            //     ),
+            //   ),
+            //   onPressed: () {},
+            //   icon: Icon(Icons.add),
+            //   label: Text("Add New"),
+            // ),
           ],
         ),
         SizedBox(height: defaultPadding),
@@ -55,7 +55,7 @@ class MyFiles extends StatelessWidget {
 class FileInfoCardGridView extends StatelessWidget {
   const FileInfoCardGridView({
     Key? key,
-    this.crossAxisCount = 4,
+    this.crossAxisCount = 3,
     this.childAspectRatio = 1,
   }) : super(key: key);
 
@@ -74,7 +74,7 @@ class FileInfoCardGridView extends StatelessWidget {
         mainAxisSpacing: defaultPadding,
         childAspectRatio: childAspectRatio,
       ),
-      itemBuilder: (context, index) => FileInfoCard(info: demoMyFiles[index]),
+      itemBuilder: (context, index) => NodeDetailsCard(info: demoMyFiles[index]),
     );
   }
 }

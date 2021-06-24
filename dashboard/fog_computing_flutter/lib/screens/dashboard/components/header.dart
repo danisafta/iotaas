@@ -29,7 +29,7 @@ class Header extends StatelessWidget {
           ),
         if (!Responsive.isMobile(context))
           Spacer(flex: Responsive.isDesktop(context) ? 2 : 1),
-        Expanded(child: SearchField()),
+        // Expanded(child: SearchField()),
         ProfileCard()
       ],
     );
@@ -75,25 +75,11 @@ class _ProfileCardState extends State<ProfileCard> {
       ),
       child: Row(
         children: [
-          // Image.asset(
-          //   "assets/images/profile_pic.png",
-          //   height: 38,
-          // ),
+
           Icon(Icons.account_circle_outlined),
 
           if (!Responsive.isMobile(context))
-            // Padding(
-            //   padding:
-            //       const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
-            //   child: Text("My Account"),
-            // ),
-          // Icon(Icons.keyboard_arrow_down),
-          // IconButton(
-          //     onPressed: () {
-          //       Navigator.push(context,
-          //           MaterialPageRoute(builder: (context) => Account()));
-          //     },
-          //     icon: const Icon(Icons.keyboard_arrow_down))
+
 
           SizedBox(width: 10),
           TextButton(
