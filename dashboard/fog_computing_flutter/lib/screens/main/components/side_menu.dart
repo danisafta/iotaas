@@ -1,6 +1,7 @@
 import 'package:admin/controllers/MenuController.dart';
 import 'package:admin/screens/main/components/actions.dart';
 import 'package:admin/screens/main/components/applications.dart';
+import 'package:admin/screens/main/components/combinational_chart.dart';
 import 'package:admin/screens/main/plot_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -51,7 +52,7 @@ class SideMenu extends StatelessWidget {
             svgSrc: "assets/icons/menu_notification.svg",
             press: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => MyActions()));
+                  MaterialPageRoute(builder: (context) => CombinationalChart()));
             },
           ),
           DrawerListTile(
