@@ -7,6 +7,8 @@ import Search from '../views/Search.vue'
 import SignUp from '../views/SignUp.vue'
 import LogIn from '../views/LogIn.vue'
 import MyAccount from '../views/MyAccount.vue'
+import Charts from '../views/Charts.vue'
+import Table from '../views/Table.vue'
 
 
 const routes = [
@@ -42,6 +44,21 @@ const routes = [
       requireLogin: true
     }
   },
+  {
+    path: '/charts',
+    name: 'Charts',
+    component: Charts,
+  },
+  {
+    path: '/:category_slug/:sensor_slug/table',
+    name: 'Table',
+    component: Table,
+  },
+  // {
+  //   path: '/table',
+  //   name: 'Table',
+  //   component: Table,
+  // },
   {
     path: '/search',
     name: 'Search',

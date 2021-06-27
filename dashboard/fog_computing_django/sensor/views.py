@@ -12,7 +12,7 @@ from .serializers import SensorSerializer, CategorySerializer
 
 class SensorsList(APIView):
     def get(self, request, format=None):
-        sensors = Sensor.objects.all()[0:4]
+        sensors = Sensor.objects.all()
         serializer = SensorSerializer(sensors, many=True)
         return Response(serializer.data)
 

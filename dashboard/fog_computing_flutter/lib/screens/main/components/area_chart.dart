@@ -1,4 +1,3 @@
-import 'package:admin/screens/main/components/area_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:admin/models/MyFiles.dart';
@@ -104,14 +103,14 @@ class RecentHumidity {
 }
 
 
-class CombinationalChart extends StatefulWidget {
+class AreaChart extends StatefulWidget {
   @override
-  _CombinationalChartState createState() => _CombinationalChartState();
+  _AreaChartState createState() => _AreaChartState();
 }
 
 
 
-class _CombinationalChartState extends State<CombinationalChart> {
+class _AreaChartState extends State<AreaChart> {
   List<Color> gradientColors = [
     const Color(0xff23b6e6),
     const Color(0xff02d39a),
@@ -173,78 +172,50 @@ class _CombinationalChartState extends State<CombinationalChart> {
                   }
 
 
-                  // List<charts.Series<RecentHumidity, String>> series = [
-                  //   charts.Series(
-                  //     id: "RecentHumidity",
-                  //     data: humid,
-                  //     domainFn: (RecentHumidity series, _) => series.date.substring(17,22),
-                  //     measureFn: (RecentHumidity series, _) => series.value,
-                  //     colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
-                  //   )
-                  // ];
-
-
                   return Container(
                       height: 400,
                       padding: EdgeInsets.all(20),
-                      child:Column(
+                      child:Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                      Expanded(
-                        flex: 5,
-                        child: Center(
-                          child: SfCartesianChart(
-                                primaryXAxis: CategoryAxis(),
+                            Expanded(
+                              flex: 5,
+                              child: Center(
+                                child: SfCartesianChart(
+                                    primaryXAxis: CategoryAxis(),
 
-                              title: ChartTitle(text: 'Overview'),
-                              // Enable legend
-                              legend: Legend(isVisible: true),
-                              // Enable tooltip
-                              tooltipBehavior: TooltipBehavior(enable: true),
+                                    title: ChartTitle(text: 'Overview'),
+                                    // Enable legend
+                                    legend: Legend(isVisible: true),
+                                    // Enable tooltip
+                                    tooltipBehavior: TooltipBehavior(enable: true),
 
-                                series: <CartesianSeries>[
-                                  // Render column series
-                                  ColumnSeries<RecentHumidity, String>(
-                                    dataSource: humid,
-                                    xValueMapper: (RecentHumidity data, _) => data.date.substring(17, 22),
-                                    yValueMapper: (RecentHumidity data, _) => data.value,
-                                    name: 'Humidity',
-                dataLabelSettings: DataLabelSettings(isVisible: true)
-                                  ),
-                                  // Render line series
-                                  ColumnSeries<RecentSensor, String>(
-                                      dataSource: temp,
-                                      xValueMapper: (RecentSensor data, _) => data.date.substring(17, 22),
-                                      yValueMapper: (RecentSensor data, _) => data.value,
-                                    name: 'Temperature',
-                dataLabelSettings: DataLabelSettings(isVisible: true)
-                                  ),
-                                ]
-                            ),
-                        ),
-                      ),
+                                    series: <CartesianSeries>[
+                                      // Render column series
+                                      AreaSeries<RecentHumidity, String>(
+                                        color: Colors.pinkAccent.withOpacity(0.4),
+                                          dataSource: humid,
+                                          xValueMapper: (RecentHumidity data, _) => data.date.substring(17, 22),
+                                          yValueMapper: (RecentHumidity data, _) => data.value,
+                                          name: 'Humidity',
+                                          dataLabelSettings: DataLabelSettings(isVisible: true)
+                                      ),
+                                      // Render line series
+                                      AreaSeries<RecentSensor, String>(
+                                        isVisible: true,
+                                          color: Colors.blueAccent.withOpacity(0.4),
+                                          dataSource: temp,
+                                          xValueMapper: (RecentSensor data, _) => data.date.substring(17, 22),
+                                          yValueMapper: (RecentSensor data, _) => data.value,
+                                          name: 'Temperature',
+                                          dataLabelSettings: DataLabelSettings(isVisible: true)
+                                      ),
+                                    ]
+                                ),
+                              ),
+                            )
 
-
-
-                        //Initialize the chart widget
-                        // SfCartesianChart(
-                        //     primaryXAxis: CategoryAxis(),
-                        //     // Chart title
-                        //     title: ChartTitle(text: 'Recent Humidity Measurements'),
-                        //     // Enable legend
-                        //     legend: Legend(isVisible: true),
-                        //     // Enable tooltip
-                        //     tooltipBehavior: TooltipBehavior(enable: true),
-                        //     series: <ChartSeries<RecentHumidity, String>>[
-                        //       LineSeries<RecentHumidity, String>(
-                        //           dataSource: humid,
-                        //           xValueMapper: (RecentHumidity sales, _) => sales.date.substring(17, 22),
-                        //           yValueMapper: (RecentHumidity sales, _) => sales.value,
-                        //           name: 'Humidity',
-                        //           // Enable data label
-                        //           dataLabelSettings: DataLabelSettings(isVisible: true))
-                        //     ]),
 
                           ]));
 

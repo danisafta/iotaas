@@ -1,4 +1,6 @@
 import 'package:admin/responsive.dart';
+import 'package:admin/screens/main/components/boxed_plots.dart';
+import 'package:admin/screens/main/components/combinational_chart.dart';
 import 'package:admin/screens/main/components/recent_plots.dart';
 import 'package:admin/screens/main/components/statistics.dart';
 import 'package:flutter/material.dart';
@@ -26,8 +28,7 @@ class _PlotDashboardState extends State<PlotDashboard> {
                 mainAxisAlignment: MainAxisAlignment.end,
               ),
               actions: [
-                Row(
-                  children:[ ElevatedButton.icon(
+               ElevatedButton.icon(
                     style: TextButton.styleFrom(
                       padding: EdgeInsets.symmetric(
                         horizontal: defaultPadding * 1.5,
@@ -41,8 +42,6 @@ class _PlotDashboardState extends State<PlotDashboard> {
                     icon: Icon(Icons.arrow_back_ios_new_rounded),
                     label: Text("Go Back"),
                   ),
-    ],
-                ),
               ],
             ),
             SizedBox(height: defaultPadding),
@@ -68,7 +67,7 @@ class _PlotDashboardState extends State<PlotDashboard> {
                 if (!Responsive.isMobile(context))
                   Expanded(
                     flex: 2,
-                    child: NodeAppsDetails(),
+                    child: BoxedPlots(),
                   ),
               ],
             )

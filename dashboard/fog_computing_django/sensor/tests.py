@@ -17,4 +17,18 @@ def index(request, name, node):
     response = requests.get(url)
     # print(query.content)
     # measurement = query.json().get('sensor_value')
+    meas = response.json()
     return Response(response.json())
+
+@api_view(['GET'])
+def tabledata(request, name, nr):
+    
+    url = 'http://k8spi.go.ro:8080/' + str(name) + '/stored/' + nr 
+    
+    # print(url)
+    response = requests.get(url)
+    # print(query.content)
+    # measurement = query.json().get('sensor_value')
+    meas = response.json()
+    return Response(response.json())
+

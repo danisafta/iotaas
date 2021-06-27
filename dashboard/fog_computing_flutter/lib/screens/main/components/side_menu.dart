@@ -52,7 +52,7 @@ class SideMenu extends StatelessWidget {
             svgSrc: "assets/icons/menu_notification.svg",
             press: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => CombinationalChart()));
+                  MaterialPageRoute(builder: (context) => MyActions()));
             },
           ),
           DrawerListTile(

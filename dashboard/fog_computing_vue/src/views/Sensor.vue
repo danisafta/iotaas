@@ -9,6 +9,13 @@
                 <h1 class="title">{{ sensor.name }}</h1>
 
                 <p>{{ sensor.description }}</p>
+                <p>{{ sensor.node }}</p>
+                <p>{{ node1 }}</p>
+                
+                
+                <router-link to="/charts" class="navbar-item">CHARTS</router-link>
+                <!-- <router-link :to="/${category_slug}/${sensor_slug}/table" class="navbar-item">TABLES</router-link> -->
+
             </div>
 
             <div class="column is-3">
@@ -43,13 +50,21 @@ export default {
         return{
             sensor: {},
             value1: [],
-            value2: []
+            value2: [],
+            node1: [],
+            category_slug: '',
+            sensor_slug: ''
         }        
     },
+
     mounted() {
-        this.getSensor()
-        this.getValue()
+        this.getSensor(),
+        this.getNode(),
+        // this.getValue()
+        this.getResp()
+        
     },
+
     methods: {
         async getSensor() {
             this.$store.commit('setIsLoading', true)
@@ -71,26 +86,66 @@ export default {
             this.$store.commit('setIsLoading', false)
 
         },
+        
+        async getNode() {
+            // this.$store.commit('setIsLoading', true)
 
+            const category_slug = this.$route.params.category_slug
+            const sensor_slug = this.$route.params.sensor_slug
+
+            // this.$store.commit('setIsLoading', false)
+
+            try {
+            const response = await axios.get(`api/v1/sensors/${category_slug}/${sensor_slug}`)
+            console.log(response.data.node)
+            }
+            catch(e) {
+                console.error(e)
+            }
+            console.log(response.data.node)
+
+            return response.data.node
+
+        },
+
+        // async getResp() {
+        //     const node = await getNode()
+        //     // const val = await getVal()
+        //     return node
+        // },
+        
         async getValue() {
             this.$store.commit('setIsLoading', true)
 
             const category_slug = this.$route.params.category_slug
-            const sensor_slug = this.$route.params.sensor_slug
-            const node = 'MASTER1'
+            const ur = `/api/v1/index/${category_slug}/${this.node}`
+            
+                // axios
+                // .get(ur)
+                // .then(response => {
+                //     this.value1 = response.data.sensor_info.split(" ")[0]
+                //     this.value2 = response.data.sensor_value
+                //     console.log(this.value1)
+                //     console.log(this.value2)
+                // })
+                // .catch(error => {
+                //     console.log(error)
+                // })
 
-            await axios
-            .get(`/api/v1/index/${category_slug}/` + node)
-            .then(response => {
-                this.value1 = response.data.sensor_info.split(" ")[0]
-                this.value2 = response.data.sensor_value
-            })
-            .catch(error => {
-                console.log(error)
-            })
+            try {
+                const response = await axios.get(`api/v1/index/${category_slug}/${node}`)
+            }
+            catch(e) {
+                console.error(e)
+            }
+
+            return response.data.sensor_info
 
             this.$store.commit('setIsLoading', false)
-
+            return {
+                value1,
+                value2
+            }
         },
 
         currentDate() {

@@ -8,12 +8,11 @@ class SensorSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "name",
+            "node",
             "get_absolute_url",
             "description",
             "get_image",
             "get_thumbnail",
-            "node"
-            # "get_measurement"
         )
 
 class CategorySerializer(serializers.ModelSerializer):
