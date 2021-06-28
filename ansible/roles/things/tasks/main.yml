@@ -10,10 +10,10 @@
     dest: /home/pi/.services/requirements.txt
 
 
-- name: Install requirements
-  shell: pip install -r requirements.txt
-  args:
-    chdir: /home/pi/.services/
+# - name: Install requirements
+#   shell: pip install -r requirements.txt
+#   args:
+#     chdir: /home/pi/.services/
 
 - name: Copy systemd service file to server
   copy:
@@ -24,9 +24,9 @@
   become: yes
 
 
-- name: Start collector service
-  systemd:
-    name: relays
-    state: started
-    enabled: yes
-  become: yes
+# # - name: Start collector service
+# #   systemd:
+# #     name: relays
+# #     state: started
+# #     enabled: yes
+# #   become: yes
