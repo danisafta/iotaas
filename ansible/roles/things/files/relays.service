@@ -1,0 +1,12 @@
+[Unit]
+Description=Service used to start relays api, hosted on k8spi.go.ro.
+After=network.target
+
+[Service]
+User=pi
+WorkingDirectory=/home/pi/.services/
+ExecStart=python3.7 relays.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

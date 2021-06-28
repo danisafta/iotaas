@@ -1,0 +1,32 @@
+---
+- name: Copy code
+  copy:
+    src: relays.py
+    dest: /home/pi/.services/relays.py
+
+- name: Copy requirements.txt
+  copy:
+    src: requirements.txt
+    dest: /home/pi/.services/requirements.txt
+
+
+- name: Install requirements
+  shell: pip install -r requirements.txt
+  args:
+    chdir: /home/pi/.services/
+
+- name: Copy systemd service file to server
+  copy:
+    src: relays.service
+    dest: /etc/systemd/system
+    owner: root
+    group: root
+  become: yes
+
+
+- name: Start collector service
+  systemd:
+    name: relays
+    state: started
+    enabled: yes
+  become: yes

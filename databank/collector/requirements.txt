@@ -1,4 +1,4 @@
-dAdafruit-Blinka==6.4.2
+Adafruit-Blinka==6.4.2
 adafruit-circuitpython-dht==3.5.8
 Adafruit-PlatformDetect==3.4.1
 Adafruit-PureIO==1.1.8
