@@ -10,10 +10,11 @@ app = Flask(__name__)
 CORS(app)
 
 Base.metadata.create_all(engine)
+session = Session()
+
 
 @app.route('/event', methods=["POST"])
 def register_event():
-    session = Session()
     data = request.get_json()
     sensor = data.get('sensor')
     node_name = data.get('node_name')
@@ -25,7 +26,6 @@ def register_event():
     try:
         session.add(event)
         session.commit()
-        session.close()
     except:
         print("failed to insert event")
         session.rollback()
@@ -36,3 +36,5 @@ def register_event():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
+    session.close()
+    

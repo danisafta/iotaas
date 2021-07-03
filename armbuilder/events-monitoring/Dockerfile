@@ -12,4 +12,4 @@ ENV POSTGRES_PW=l1centa
 
 COPY code/ .
 
-CMD ["python", "app.py"]
+CMD ["python", "events.py"]
