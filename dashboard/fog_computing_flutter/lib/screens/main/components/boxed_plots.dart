@@ -39,7 +39,7 @@ class _BoxedPlotsState extends State<BoxedPlots> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Running Applications Overview",
+                    "Measurements Overview",
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,

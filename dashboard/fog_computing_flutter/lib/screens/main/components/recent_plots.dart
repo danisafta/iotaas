@@ -166,7 +166,7 @@ class _RecentPlotsState extends State<RecentPlots>
   List<Widget> list = [
     Tab(text: "Humidity"),
     Tab(text: "Temperature"),
-    Tab(text: "Measurements Overview"),
+    // Tab(text: "Measurements Overview"),
   ];
 
   @override
@@ -222,7 +222,7 @@ class _RecentPlotsState extends State<RecentPlots>
                     child: TabBarView(children: [
                       MyBarChart(),
                       MyTemperatureBarChart(),
-                      CombinationalChart(),
+                      // CombinationalChart(),
                     ])),
               ],
             ),

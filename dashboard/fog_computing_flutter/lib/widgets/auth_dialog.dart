@@ -276,7 +276,7 @@ class _AuthDialogState extends State<AuthDialog> {
                                       });
                                       Future.delayed(Duration(milliseconds: 500),
                                           () {
-                                        Navigator.of(context).pop();
+                                        // Navigator.of(context).pop();
                                         Navigator.of(context)
                                             .pushReplacement(MaterialPageRoute(
                                           fullscreenDialog: true,

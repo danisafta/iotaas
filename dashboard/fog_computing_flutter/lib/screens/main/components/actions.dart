@@ -6,11 +6,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../../responsive.dart';
-
-
 
 // Future<List<RecentEvents>> fetchRecentEvents() async {
 //   var url = 'http://k8spi.go.ro:8080/events/stored/10';
@@ -21,10 +17,13 @@ import '../../../responsive.dart';
 //   for (var i = 0; i < demoMyFiles.length; i++) nodes.add(demoMyFiles[i].title);
 //
 //   var state;
-//   response = await http.post(Uri.parse(url), body: jsonEncode(<String, String>{
-//     'state': state,
-//   }),);
-//   if (response.statusCode == 201) {
+//   response = await http.post(
+//     Uri.parse(url),
+//     body: jsonEncode(<String, String>{
+//       'state': state,
+//     }),
+//   );
+//   if (response.statusCode == 200) {
 //     // List<dynamic> values = jsonDecode(response.body);
 //     // for (var i = 0; i < 10; i++) {
 //     //   sensors.add(RecentEvents.fromJson(values[i]));
@@ -48,9 +47,9 @@ import '../../../responsive.dart';
 //
 //   RecentEvents(
 //       {required this.node_name,
-//         required this.sensor_info,
-//         required this.date,
-//         required this.event_info});
+//       required this.sensor_info,
+//       required this.date,
+//       required this.event_info});
 //
 //   factory RecentEvents.fromJson(json) {
 //     return RecentEvents(
@@ -62,10 +61,6 @@ import '../../../responsive.dart';
 //   }
 // }
 
-
-
-
-
 class MyActions extends StatefulWidget {
   MyActions({Key? key}) : super(key: key);
 
@@ -74,16 +69,49 @@ class MyActions extends StatefulWidget {
 }
 
 class _MyActionsState extends State<MyActions> {
+  // late Future<List<RecentEvents>> futureEvents;
+
 
   @override
   void initState() {
     super.initState();
+    // futureEvents = fetchRecentEvents();
+    // fetch relay states
   }
-
   bool _switchValue = false;
   bool _switchValue2 = false;
   bool _switchValue3 = false;
   bool _switchValue4 = false;
+
+  void checkState(id, state, node) async {
+    var url = 'http://k8spi.go.ro:5011/state/12';
+    var response;
+    response = await http.get(
+      Uri.parse(url)
+    );
+
+    // if(response.body.contains('False')){
+    //   return true;
+    // }
+    // else
+    //   return false;
+    print(response.body);
+    // return response.body;
+    // print("aaaa");
+  }
+
+
+  // void setRelay(id, state, node) async {
+  //   var url = 'http://k8spi.go.ro:5012/relay/id';
+  //   var response;
+  //   response = await http.get(
+  //       Uri.parse(url)
+  //   );
+  //
+  //   print(response.statusCode);
+  //   // print("aaaa");
+  // }
+
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +121,6 @@ class _MyActionsState extends State<MyActions> {
         primarySwatch: Colors.indigo,
         scaffoldBackgroundColor: secondaryColor,
       ),
-
       home: Scaffold(
         appBar: AppBar(
           title: Text("Take Action"),
@@ -104,7 +131,7 @@ class _MyActionsState extends State<MyActions> {
                 padding: EdgeInsets.symmetric(
                   horizontal: defaultPadding * 1.5,
                   vertical:
-                  defaultPadding / (Responsive.isMobile(context) ? 2 : 1),
+                      defaultPadding / (Responsive.isMobile(context) ? 2 : 1),
                 ),
               ),
               onPressed: () {
@@ -112,145 +139,74 @@ class _MyActionsState extends State<MyActions> {
               },
               icon: Icon(Icons.arrow_back_ios_new_rounded),
               label: Text("Go Back"),
-            ),],
-        ),
-
-
-        body: Row(
-          children:[
-
-
-            Column(
-            children:[
-              SizedBox(
-                height: defaultPadding * 10,
-                width: defaultPadding * 70,
-              ),
-              Container(
-              padding: EdgeInsets.all(defaultPadding),
-              decoration: BoxDecoration(
-                color: secondaryColor,
-                // borderRadius: const BorderRadius.all(Radius.circular(10)),
-              ),
-              child: Column(
-                children:[
-
-                  Transform.scale( scale: 2.0,
-                    child: new CupertinoSwitch(
-                      value: _switchValue,
-                      onChanged: (value) {
-                        setState(() {
-                          _switchValue = value;
-
-                        });
-                      },
-                    ),
-                  ),
-
-                  //
-                  // CupertinoSwitch(
-                  //   value: _switchValue,
-                  //   onChanged: (value) {
-                  //     setState(() {
-                  //       _switchValue = value;
-                  //
-                  //     });
-                  //   },
-                  // ),
-                  //
-                  //
-                  SizedBox(height: defaultPadding),
-                  Text("Open/Close the window", style: TextStyle(fontWeight: FontWeight.bold, fontStyle: FontStyle.italic, color: Colors.white)),
-                ],
-              ),
             ),
-              Container(
-                padding: EdgeInsets.all(defaultPadding),
-                decoration: BoxDecoration(
-                  color: secondaryColor,
-                  // borderRadius: const BorderRadius.all(Radius.circular(10)),
-                ),
-                child: Column(
-                  children:[
-
-                    Transform.scale( scale: 2.0,
-                      child: new CupertinoSwitch(
-                        value: _switchValue2,
-                        onChanged: (value) {
-                          setState(() {
-                            _switchValue2 = value;
-
-                          });
-                        },
-                      ),
-                    ),
-
-                    //
-                    // CupertinoSwitch(
-                    //   value: _switchValue,
-                    //   onChanged: (value) {
-                    //     setState(() {
-                    //       _switchValue = value;
-                    //
-                    //     });
-                    //   },
-                    // ),
-                    //
-                    //
-                    SizedBox(height: defaultPadding),
-                    Text("Start/Stop gas", style: TextStyle(fontWeight: FontWeight.bold, fontStyle: FontStyle.italic, color: Colors.white)),
-                  ],
-                ),
-              ),
-      ],
-          ),
-
+          ],
+        ),
+        body: Row(
+          children: [
             Column(
-
-
-              children:[
+              children: [
                 SizedBox(
                   height: defaultPadding * 10,
-                  // width: defaultPadding * 50,
+                  width: defaultPadding * 70,
                 ),
                 Container(
-                padding: EdgeInsets.all(defaultPadding),
-                decoration: BoxDecoration(
-                  color: secondaryColor,
-                  // borderRadius: const BorderRadius.all(Radius.circular(10)),
-                ),
-                child: Column(
-                  children:[
+                  padding: EdgeInsets.all(defaultPadding),
+                  decoration: BoxDecoration(
+                    color: secondaryColor,
+                    // borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  ),
+                  child:  Column(
+                        children: [
+                          Transform.scale(
+                            scale: 2.0,
+                            child: new CupertinoSwitch(
+                              value: _switchValue,
+                              onChanged: (value) {
+                                setState(() {
+                                  // FutureBuilder(
+                                  //   future: checkState(12, 122, 1),
+                                  //   builder: (context, snapshot) {
+                                  //     print('aaaaaa');
+                                  //     var res = snapshot.data;
+                                  //     // if(res = true){
+                                  //       _switchValue = value;
+                                  //       print(snapshot.data);
+                                  //     //   return Text("Value is False");
+                                  //     // }
+                                  //     // else {
+                                  //     return Text("Value is True");
+                                  //     // }
+                                  //   }
+                                  // );
 
-                    Transform.scale( scale: 2.0,
-                      child: new CupertinoSwitch(
-                        value: _switchValue3,
-                        onChanged: (value) {
-                          setState(() {
-                            _switchValue3 = value;
 
-                          });
-                        },
+                                    _switchValue = value;
+                                  
+                                  checkState(12, 122, 1);
+                                  // // ignore: unrelated_type_equality_checks
+                                  // if(res == true){
+                                  // }
+                                  // else
+                                  //   Text("aaa");
+
+                                });
+                              },
+                            ),
+                          ),
+                          SizedBox(height: defaultPadding),
+                          Text("Open/Close the window",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontStyle: FontStyle.italic,
+                                  color: Colors.white)),
+                        ],
                       ),
-                    ),
 
-                    //
-                    // CupertinoSwitch(
-                    //   value: _switchValue,
-                    //   onChanged: (value) {
-                    //     setState(() {
-                    //       _switchValue = value;
-                    //
-                    //     });
-                    //   },
-                    // ),
-                    //
-                    //
-                    SizedBox(height: defaultPadding),
-                    Text("Turn on/off the lights", style: TextStyle(fontWeight: FontWeight.bold, fontStyle: FontStyle.italic, color: Colors.white)),
-                  ],
-                ),
-              ),
+
+
+                  ),
+                // ),
                 Container(
                   padding: EdgeInsets.all(defaultPadding),
                   decoration: BoxDecoration(
@@ -258,43 +214,96 @@ class _MyActionsState extends State<MyActions> {
                     // borderRadius: const BorderRadius.all(Radius.circular(10)),
                   ),
                   child: Column(
-                    children:[
-
-                      Transform.scale( scale: 2.0,
+                    children: [
+                      Transform.scale(
+                        scale: 2.0,
                         child: new CupertinoSwitch(
-                          value: _switchValue4,
+                          value: _switchValue2,
                           onChanged: (value) {
                             setState(() {
-                              _switchValue4 = value;
-
+                              _switchValue2 = value;
                             });
                           },
                         ),
                       ),
-
-                      //
-                      // CupertinoSwitch(
-                      //   value: _switchValue,
-                      //   onChanged: (value) {
-                      //     setState(() {
-                      //       _switchValue = value;
-                      //
-                      //     });
-                      //   },
-                      // ),
-                      //
-                      //
                       SizedBox(height: defaultPadding),
-                      Text("Turn on/off the air conditioning", style: TextStyle(fontWeight: FontWeight.bold, fontStyle: FontStyle.italic, color: Colors.white)),
+                      Text("Start/Stop gas",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontStyle: FontStyle.italic,
+                              color: Colors.white)),
                     ],
                   ),
                 ),
               ],
             ),
-    ],
+            Column(
+              children: [
+                SizedBox(
+                  height: defaultPadding * 10,
+                  // width: defaultPadding * 50,
+                ),
+                Container(
+                  padding: EdgeInsets.all(defaultPadding),
+                  decoration: BoxDecoration(
+                    color: secondaryColor,
+                    // borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  ),
+                  child: Column(
+                    children: [
+                      Transform.scale(
+                        scale: 2.0,
+                        child: new CupertinoSwitch(
+                          value: _switchValue3,
+                          onChanged: (value) {
+                            setState(() {
+                              _switchValue3 = value;
+                            });
+                          },
+                        ),
+                      ),
+                      SizedBox(height: defaultPadding),
+                      Text("Turn on/off the lights",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontStyle: FontStyle.italic,
+                              color: Colors.white)),
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.all(defaultPadding),
+                  decoration: BoxDecoration(
+                    color: secondaryColor,
+                    // borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  ),
+                  child: Column(
+                    children: [
+                      Transform.scale(
+                        scale: 2.0,
+                        child: new CupertinoSwitch(
+                          value: _switchValue4,
+                          onChanged: (value) {
+                            setState(() {
+                              _switchValue4 = value;
+                            });
+                          },
+                        ),
+                      ),
+                      SizedBox(height: defaultPadding),
+                      Text("Turn on/off the air conditioning",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontStyle: FontStyle.italic,
+                              color: Colors.white)),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
-
   }
 }
