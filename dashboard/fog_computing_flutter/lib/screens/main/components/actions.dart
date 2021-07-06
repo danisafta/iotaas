@@ -215,39 +215,68 @@ class _MyActionsState extends State<MyActions> {
                                 }
                                 return CupertinoSwitch(
                                   value: _switchValue,
-                                  onChanged: (value) {
+                                  onChanged: (bool value) {
                                     setState(() {
                                       var res = snapshot.data;
                                       _switchValue = value;
 
+                                    if(_switchValue == true) {
                                       showDialog(
                                         context: context,
                                         builder: (context) {
                                           return AlertDialog(
                                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-                                            backgroundColor: secondaryColor,
-                                            elevation: 16,
-                                            // child: Container(
-                                            //   child: Row(
-                                            //       children:[
-                                            //         SizedBox(
-                                            //           height: 200,
-                                            //           width: 50,
-                                            //         ),
-                                                  content:  Row(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                      children:[ Text(snapshot.data![0].state.toString(), style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white))
-                                          ]
-                                                  )
-                                              // ]
-                                          //     ),
-                                          // )
+                                              backgroundColor: secondaryColor,
+                                              elevation: 16,
+                                              // child: Container(
+                                              //   child: Row(
+                                              //       children:[
+                                              //         SizedBox(
+                                              //           height: 200,
+                                              //           width: 50,
+                                              //         ),
+                                              content:  Row(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children:[ Text("Light successfully turned on", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white))
+                                                  ]
+                                              )
+                                            // ]
+                                            //     ),
+                                            // )
 
                                           );
                                         },
                                       );
-                                      print(snapshot.data![0].state);
+                                    }
+                                     else {
+                                      // print(snapshot.data![0].state);
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+                                              backgroundColor: secondaryColor,
+                                              elevation: 16,
+                                              // child: Container(
+                                              //   child: Row(
+                                              //       children:[
+                                              //         SizedBox(
+                                              //           height: 200,
+                                              //           width: 50,
+                                              //         ),
+                                              content:  Row(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children:[ Text("Light successfully turned off", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white))
+                                                  ]
+                                              )
+                                            // ]
+                                            //     ),
+                                            // )
 
+                                          );
+                                        },
+                                      );
+                                    }
                                       // _switchValue = value;
                                       // checkState(12, 122, 1);
                                     });
@@ -264,7 +293,7 @@ class _MyActionsState extends State<MyActions> {
                             }),
                       ),
                       SizedBox(height: defaultPadding),
-                      Text("Open/Close the window",
+                      Text("Turn on/off the lights",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontStyle: FontStyle.italic,
@@ -329,7 +358,7 @@ class _MyActionsState extends State<MyActions> {
                         ),
                       ),
                       SizedBox(height: defaultPadding),
-                      Text("Turn on/off the lights",
+                      Text("Open/Close the window",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontStyle: FontStyle.italic,
