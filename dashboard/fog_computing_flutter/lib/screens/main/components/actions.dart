@@ -61,6 +61,57 @@ import '../../../responsive.dart';
 //   }
 // }
 
+Future<List<StateDetails>> checkState(id, state, node) async {
+  var url = 'http://k8spi.go.ro:5011/state/12';
+
+  var response;
+  List<StateDetails> apps = [];
+
+  response = await http.get(Uri.parse(url));
+  if (response.statusCode == 200) {
+    // var values = jsonDecode(response.body);
+
+    // for (var i = 0; i < values.length; i++) {
+    apps.add(StateDetails.fromJson(jsonDecode(response.body)));
+
+    // print(values[i]);
+    // }
+  } else {
+    // If the server did not return a 200 OK response,s
+    // then throw an exception.
+    throw Exception('Failed to load');
+  }
+
+  return apps;
+}
+
+class StateDetails {
+  final dynamic id;
+  final dynamic state;
+
+  StateDetails({required this.id, required this.state});
+
+  factory StateDetails.fromJson(json) {
+    return StateDetails(
+      id: json['id'],
+      state: json['state'],
+    );
+  }
+}
+
+// Future modifyState(id, state, node) async {
+//   var url = 'http://k8spi.go.ro:5011/state/12';
+//   var response;
+//   response = await http.post(
+//       Uri.parse(url),
+//       body: jsonEncode(<String, String>{
+//       'state': state,
+//     }),
+//
+//   );
+//   return response.body;
+// }
+
 class MyActions extends StatefulWidget {
   MyActions({Key? key}) : super(key: key);
 
@@ -70,48 +121,37 @@ class MyActions extends StatefulWidget {
 
 class _MyActionsState extends State<MyActions> {
   // late Future<List<RecentEvents>> futureEvents;
-
+  late Future<List<StateDetails>> futureAction;
 
   @override
   void initState() {
     super.initState();
     // futureEvents = fetchRecentEvents();
     // fetch relay states
+    futureAction = checkState(12, 122, 1);
   }
+
   bool _switchValue = false;
   bool _switchValue2 = false;
   bool _switchValue3 = false;
   bool _switchValue4 = false;
 
-  void checkState(id, state, node) async {
-    var url = 'http://k8spi.go.ro:5011/state/12';
-    var response;
-    response = await http.get(
-      Uri.parse(url)
-    );
-
-    // if(response.body.contains('False')){
-    //   return true;
-    // }
-    // else
-    //   return false;
-    print(response.body);
-    // return response.body;
-    // print("aaaa");
-  }
-
-
-  // void setRelay(id, state, node) async {
-  //   var url = 'http://k8spi.go.ro:5012/relay/id';
+  // void checkState(id, state, node) async {
+  //   var url = 'http://k8spi.go.ro:5011/state/12';
   //   var response;
   //   response = await http.get(
-  //       Uri.parse(url)
+  //     Uri.parse(url)
   //   );
   //
-  //   print(response.statusCode);
+  //   // if(response.body.contains('False')){
+  //   //   return true;
+  //   // }
+  //   // else
+  //   //   return false;
+  //   print(response.body);
+  //   // return response.body;
   //   // print("aaaa");
   // }
-
 
   @override
   Widget build(BuildContext context) {
@@ -156,56 +196,82 @@ class _MyActionsState extends State<MyActions> {
                     color: secondaryColor,
                     // borderRadius: const BorderRadius.all(Radius.circular(10)),
                   ),
-                  child:  Column(
-                        children: [
-                          Transform.scale(
-                            scale: 2.0,
-                            child: new CupertinoSwitch(
-                              value: _switchValue,
-                              onChanged: (value) {
-                                setState(() {
-                                  // FutureBuilder(
-                                  //   future: checkState(12, 122, 1),
-                                  //   builder: (context, snapshot) {
-                                  //     print('aaaaaa');
-                                  //     var res = snapshot.data;
-                                  //     // if(res = true){
-                                  //       _switchValue = value;
-                                  //       print(snapshot.data);
-                                  //     //   return Text("Value is False");
-                                  //     // }
-                                  //     // else {
-                                  //     return Text("Value is True");
-                                  //     // }
-                                  //   }
-                                  // );
+                  child: Column(
+                    children: [
+                      Transform.scale(
+                        scale: 2.0,
+                        child: FutureBuilder<List<StateDetails>>(
+                            future: futureAction,
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                int len = 0;
+                                len = snapshot.data!.length;
 
+                                List<StateDetails> data = [];
+                                for (var i = 0; i < len; i++) {
+                                  data.add(StateDetails(
+                                      id: snapshot.data![i].id,
+                                      state: snapshot.data![i].state));
+                                }
+                                return CupertinoSwitch(
+                                  value: _switchValue,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      var res = snapshot.data;
+                                      _switchValue = value;
 
-                                    _switchValue = value;
-                                  
-                                  checkState(12, 122, 1);
-                                  // // ignore: unrelated_type_equality_checks
-                                  // if(res == true){
-                                  // }
-                                  // else
-                                  //   Text("aaa");
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+                                            backgroundColor: secondaryColor,
+                                            elevation: 16,
+                                            // child: Container(
+                                            //   child: Row(
+                                            //       children:[
+                                            //         SizedBox(
+                                            //           height: 200,
+                                            //           width: 50,
+                                            //         ),
+                                                  content:  Row(
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                      children:[ Text(snapshot.data![0].state.toString(), style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white))
+                                          ]
+                                                  )
+                                              // ]
+                                          //     ),
+                                          // )
 
-                                });
-                              },
-                            ),
-                          ),
-                          SizedBox(height: defaultPadding),
-                          Text("Open/Close the window",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontStyle: FontStyle.italic,
-                                  color: Colors.white)),
-                        ],
+                                          );
+                                        },
+                                      );
+                                      print(snapshot.data![0].state);
+
+                                      // _switchValue = value;
+                                      // checkState(12, 122, 1);
+                                    });
+                                  },
+                                );
+                              } else if (snapshot.hasError) {
+                                return Text("${snapshot.error}");
+                              }
+
+                              // By default, show a loading spinner.
+                              return Container(
+                                  alignment: Alignment.center,
+                                  child: CircularProgressIndicator());
+                            }),
                       ),
-
-
-
+                      SizedBox(height: defaultPadding),
+                      Text("Open/Close the window",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontStyle: FontStyle.italic,
+                              color: Colors.white)),
+                    ],
                   ),
+                ),
                 // ),
                 Container(
                   padding: EdgeInsets.all(defaultPadding),

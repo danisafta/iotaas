@@ -1,4 +1,3 @@
-import 'package:admin/models/MyFiles.dart';
 import 'package:flutter/material.dart';
 import '../../../constants.dart';
 import 'dart:async';
@@ -22,7 +21,7 @@ Future<List<AppDetails>> fetchApps() async {
     for (var i = 0; i < values.length; i++) {
       apps.add(AppDetails.fromJson(values[i]));
 
-      print(values[i]);
+      // print(values[i]);
     }
   } else {
     // If the server did not return a 200 OK response,s
@@ -129,7 +128,6 @@ class _ApplicationsState extends State<Applications>
                               int len = 0;
                               len = snapshot.data!.length;
 
-                              print(len);
                               List<AppDetails> data = [];
                               for (var i = 0; i < len; i++) {
                                 data.add(AppDetails(
@@ -180,7 +178,9 @@ class _ApplicationsState extends State<Applications>
                             }
 
                             // By default, show a loading spinner.
-                            return CircularProgressIndicator();
+                            return Container(
+                              alignment: Alignment.center,
+                                child: CircularProgressIndicator());
                           },
                         )),
                   )
